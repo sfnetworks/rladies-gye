@@ -1,0 +1,135 @@
+# Live demo
+
+## Datos espaciales 
+
+Una pequeña introducción a `sf` y su estructura de datos. 
+Comenzamos con un archivo geojson con los cantones del Ecuador:
+
+```{r sf}
+library(sf)
+cantones = read_sf("https://gist.githubusercontent.com/emamut/25912e117ab46fa00a63c6e890575201/raw/5a17bbadd509568a39fdb2994b2b9a205b720ad9/cantones-ecuador.geojson")
+cantones
+```
+
+El poder de `sf` recae en su capacidad de manejar datos espaciales de una manera
+intuitiva y organizada: "tidy"!
+Por ejemplo, podemos cambiar rápidamente el sistema de coordenadas:
+
+```{r sfcoord}
+cantones |> st_crs()
+cantones |> st_coordinates() |> head()
+cantones |> st_transform(24817) |> st_coordinates() |> head()
+```
+
+Y visualizar la geometría con una línea de código:
+
+```{r sfplot}
+plot(cantones$geometry)
+```
+
+¿Mapa interactivo? Podemos usar `tmap`:
+
+```{r sftmap}
+library(tmap)
+tmap_mode('view')
+qtm(cantones, fill = '#88398A', border = 'white')
+```
+
+## Redes espaciales
+
+Ahora que somos expertos en `sf`, vamos directo a las redes espaciales. 
+Llamamos a la libreria `sfnetworks` y a su red para ejemplos `roxel`.
+
+```{r roxel}
+library(sfnetworks)
+roxel$geometry |> plot()
+```
+Roxel es un pueblo en Münster, Alemania. 
+Un poco lejano del Ecuador...
+
+```{r}
+de = st_point(c(7.525859,51.9504935))
+ec = st_point(c(-79.0243995,-2.892183))
+qtm(st_sfc(c(de,ec)))
+```
+Vamos, un poco más cerca: 
+
+```{r cuenca}
+load('data/cuenca.rda')
+par(mar = c(0,0,0,0))
+plot(cuenca$geometry)
+```
+El código para generar el objecto `cuenca` lo encuentran en [data/data_preparation.R](data/data_preparation.R).
+
+Los datos son obtenidos con [`osmdata`](https://cran.r-project.org/package=osmdata). 
+Por favor, úsenlo con moderación. 
+Descargas desde la API de OSM son limitadas, en especial para zonas grandes. 
+Opciones para obtener datos de ciudades más grandes son por ejemplo [`osmextract`](https://cran.r-project.org/package=osmextract).
+
+### Explorar
+
+Vamos a explorar un poco los datos:
+```{r cuencaexp}
+cuenca
+```
+Ahora podemos convertir nuestra red vial en un objeto `sfnetwork`. 
+Existen varias formas de construir una red, y varias opciones. 
+Puedes explorarlas con `?sfnetwork`.
+
+```{r cuencacreate}
+library(tidyverse)
+cuenca |>
+  select(name, type) |>
+  as_sfnetwork() # prueba las opciones!
+```
+
+Guardemos la red en un objeto
+```{r cuencasave}
+net = cuenca |>
+  st_transform(24817) |> 
+  as_sfnetwork(directed = FALSE)
+net
+par(mar = c(0,0,0,0))
+plot(net)
+```
+
+### Wrangle
+
+Podemos explorar la red con verbos de `dplyr`
+
+```{r verbs}
+ net |> 
+  activate('edges') |>
+  filter(type == 'residential')
+```
+
+O, podemos aplicar filtros espaciales!
+
+```{r sffilter}
+net |> 
+  st_filter(sansebas) 
+```
+
+O funciones específicas para análisis de redes.
+Como por ejemplo la intermediación (cuantifica la frecuencia en que un nodo se encuentra entre los caminos más cortos de la red, https://es.wikipedia.org/wiki/Centralidad_de_intermediaci%C3%B3n)
+
+```{r central}
+library(tidygraph)
+net |>
+  activate('nodes') |>
+  mutate(intermed = centrality_betweenness())
+```
+
+Por último, podemos aplicar funciones específicas para redes espaciales,
+diseñadas para `sfnetworks`
+
+```{r sfnfunc}
+net |>
+  activate('edges') |>
+  select(to, from, geometry) |>
+  st_transform(24817) |> 
+  mutate(
+    longitud = edge_length()
+  )
+```
+
