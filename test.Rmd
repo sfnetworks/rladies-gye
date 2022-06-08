@@ -1,0 +1,7 @@
+## Testing binder
+
+```{r}
+library(sfnetworks)
+roxel |> as_sfnetwork()
+```
+
