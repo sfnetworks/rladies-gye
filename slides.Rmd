@@ -76,6 +76,24 @@ old_hooks <- fansi::set_knit_hooks(knitr::knit_hooks,
                                    which = c("output", "message", "error"))
 ```
 
+### Sobre mí...
+
+--
+
+Investigadora en la [Universidad de Salzburg](https://www.plus.ac.at/risk-hazard-climate/) `r emo::ji('artificial_satellite')`
+
+--
+
+Amo codificar en R, aunque ahora trabajo también en Python `r emo::ji('snake')`
+
+--
+
+Si no estoy programando, me encuentran en la montaña en bici o de senderismo `r emo::ji('mountain')`
+
+![:scale 30%](https://dgtzuqphqg23d.cloudfront.net/JtVzfcASWgycVOcxPF_9w22mglBk42rCOKk_LpY4IKg-2048x1536.jpg)
+
+---
+class: center, middle, hide-logo
 
 <iframe src="https://wall.sli.do/event/rg8ExyZuhZ4CsVYsdKGZAK?section=a8210543-8317-4e54-97fb-23bc7aca514b" height="100%" width="100%" frameBorder="0" style="min-height: 560px;" title="Slido"></iframe>
 
