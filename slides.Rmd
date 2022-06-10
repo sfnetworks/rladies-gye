@@ -47,7 +47,7 @@ style_mono_accent(
   base_color = '#ffa500', #orange
   title_slide_background_image = "figs/milano.png",
   background_image = "figs/milano_bg.png",
-  code_font_size = '12px',
+  code_font_size = '14px',
   text_slide_number_color = '#b3b3b3', #grey70
   link_color = '#ff4500', #orangered  
   footnote_font_size = '0.5em',
@@ -96,6 +96,11 @@ Si no estoy programando, me encuentran en la montaña en bici o de senderismo `r
 class: center, middle, hide-logo
 
 <iframe src="https://wall.sli.do/event/rg8ExyZuhZ4CsVYsdKGZAK?section=a8210543-8317-4e54-97fb-23bc7aca514b" height="100%" width="100%" frameBorder="0" style="min-height: 560px;" title="Slido"></iframe>
+
+---
+class: center, middle, hide-logo
+
+<iframe src="https://infographics.sli.do/?i=cHViLDg1YzkxMmIyLTQ4YTctNGUzMS1iOWVhLThmNjM2NzllMjJlMSxjYzkxNThiNC00M2ZmLTQ3ZmMtOWJjZC01NDM4MDIzNzFmZDM=" height="90%" width="150%" title="Slido"></iframe>
 
 ---
 class: center, middle, hide-logo
@@ -156,7 +161,7 @@ roxel |>
 
 **Tidyverse**
 
-Colección de paquestes de R para ciencia de datos
+Colección de paquetes de R para ciencia de datos
 
 Comparten una filosofía de estructura
 
@@ -269,12 +274,12 @@ class: center, top
   
 `sfnetworks`:
 
-  > “Una cercana aproximación de datos *ordenados* para datos relacionales .orange[*geoespaciales*] son dos .orange[*objectos sf*], uno que describa los *nodos* y otro describiendo las *aristas*”
+  > “Una cercana aproximación de datos *ordenados* para datos relacionales .orange[*geoespaciales*] son dos .orange[*objetos sf*], uno que describa los *nodos* y otro describiendo las *aristas*”
 
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
@@ -295,7 +300,7 @@ roxel |>
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
@@ -316,7 +321,7 @@ roxel |>
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
@@ -333,7 +338,7 @@ roxel
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
@@ -352,7 +357,7 @@ roxel |>
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
@@ -375,7 +380,7 @@ roxel |>
 ---
 class: top
 
-## Objecto `sfnetwork`
+## Objeto `sfnetwork`
 
 .pull-left-40[
 ```{r, eval = FALSE}
